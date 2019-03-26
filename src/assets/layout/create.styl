@@ -1,0 +1,59 @@
+.create
+  text-align left
+  .container
+    padding 50px 0
+    .subtitle
+      color $Black
+      display block
+  form
+    margin-top 30px
+    max-width 350px
+    width 100%
+    label
+      display block
+      margin-bottom 15px
+      font-size .9em
+      span
+        color $Black
+        display block
+        font-style italic
+        font-size .8em
+    input,
+    textarea
+      display block
+      height 35px
+      padding 0 5px
+      width 100%
+      set-font('mont', 400)
+    textarea
+      height 100px
+      padding 5px
+      resize none
+    .controls
+      padding 20px 0 0
+    button
+      background-color: $Blue
+      border 0
+      border-radius 5px
+      color white
+      height 35px
+      padding 10px 15px
+      set-font('rale', 700)
+    .add
+      color $Blue
+      cursor pointer
+      font-weight 700
+      margin-left 15px
+      position relative
+      &:after
+        bottom -3px
+        background-color $Blue
+        content ''
+        height 2px
+        left 0
+        position absolute
+        width 0
+        transition()
+      &:hover
+        &:after
+          width 100%
