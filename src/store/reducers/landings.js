@@ -1,17 +1,22 @@
 import * as actions from '../actions/types';
 
-const setLandings = (state, action) => (
-  {
-    ...state,
-    landings: action.data,
-  }
-);
-
-const landingsReducer = (state = [], action) => {
+const landingsReducer = (state = {}, action) => {
   switch (action.type) {
     case actions.FETCH_LANDINGS:
-      console.log(action);
-      return setLandings(state, action);
+      return (
+        {
+          ...state,
+          landings: action.data,
+        }
+      );
+
+    case actions.CREATE_LANDING:
+      return (
+        {
+          ...state,
+          createdLanding: action.data,
+        }
+      );
 
     default:
       return state;

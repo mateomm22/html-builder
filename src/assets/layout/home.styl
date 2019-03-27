@@ -1,21 +1,31 @@
 .home
   padding-top 50px
   text-align center
-  .grid
+  table
     margin-top 50px
-  .card-home
-    border 1px solid gray
-    .text
-      padding 15px
-    button
-      background-color $Blue
-      border 0
-      border-radius 5px
-      color white
-      cursor pointer
-      margin-top 15px
-      padding 10px 15px
-      width 120px
-      transition()
-      &:hover
-        background-color lightness($Blue, 35%)
+    text-align left
+    width 100%
+    th,
+    td
+      padding 10px 5px
+      vertical-align top
+    td
+      border-top 1px solid #dee2e6
+.modal-create
+  strong
+    display block
+  form
+    display inline-block
+    margin-top 30px
+    max-width 450px
+    text-align center
+    input,
+    select
+      display block
+      margin-bottom 10px
+      width 100%
+.modal-delete
+  .alert
+    display block
+    color red
+    margin-bottom 25px
