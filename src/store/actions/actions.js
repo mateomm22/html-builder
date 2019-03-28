@@ -1,3 +1,5 @@
+import History from '../../history';
+
 import * as actions from './types';
 import db from '../../Firebase';
 
@@ -47,6 +49,7 @@ export const newLanding = data => (
             universidad: data.universidad,
           },
         });
+        History.push(`/${docRef.id}/create`);
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
