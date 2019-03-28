@@ -6,17 +6,13 @@ import db from '../../Firebase';
 // Landings actions
 export const fetchLandings = () => (
   (dispatch) => {
-    const landings = [];
+    const landings = {};
     db.collection('landings')
       .get()
-      .then((queryLandings) => {
-        queryLandings.forEach((landing) => {
+      .then((allLandings) => {
+        allLandings.forEach((landing) => {
           const { nombre, universidad } = landing.data();
-          landings.push({
-            id: landing.id,
-            nombre,
-            universidad,
-          });
+          landings[landing.id] = { nombre, universidad };
         });
         dispatch({
           type: actions.FETCH_LANDINGS,
@@ -41,6 +37,9 @@ export const newLanding = data => (
     db.collection('landings')
       .add(data)
       .then((docRef) => {
+        db.collection('grupos').doc(docRef.id)
+          .set({ programas: [] })
+          .then();
         dispatch({
           type: actions.CREATE_LANDING,
           data: {
@@ -50,16 +49,35 @@ export const newLanding = data => (
           },
         });
         History.push(`/${docRef.id}/create`);
-      })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Error adding document: ', error);
       });
   }
 );
 
+export const editLanding = (id, data) => (
+  (dispatch) => {
+    db.collection('landings').doc(id)
+      .set(data)
+      .then(() => {
+        dispatch(fetchLandings());
+      });
+  }
+);
 
 // Programs actions
+export const fetchPrograms = idLanding => (
+  (dispatch) => {
+    db.collection('grupos').doc(idLanding)
+      .get()
+      .then((programsArr) => {
+        console.log(programsArr.data());
+        dispatch({
+          type: actions.FETCH_PROGRAMS,
+          data: programsArr.data(),
+        });
+      });
+  }
+);
+
 export const selectCard = id => (
   {
     type: actions.SELECT_CARD,

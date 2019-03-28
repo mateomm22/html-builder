@@ -3,15 +3,37 @@
   .container
     padding 50px 0
   table
+    border-collapse collapse
     margin-top 50px
     text-align left
     width 100%
+    thead
+      tr
+        background-color $Blue
+        color white
+    tbody
+      tr:nth-of-type(odd)
+        background-color: lighten($Blue, 82)
     th,
     td
-      padding 10px 5px
-      vertical-align top
-    td
-      border-top 1px solid #dee2e6
+      border 1px solid $Blue
+      padding 10px 15px
+      vertical-align middle
+    .nombre
+      width 50%
+    .uni
+      width 30%
+    .actions
+      width 20%
+    .mock
+      background-color rgba(black, 0.1)
+      border-radius 5px
+      height 10px
+      margin 7px 0
+      width 100%
+    a
+      color $LightBlue
+      text-decoration none
 .modal-create
   .modal-header
     background-color $Blue

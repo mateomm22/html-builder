@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -89,7 +88,7 @@ class Crear extends Component {
 
 const mapStateToProps = state => (
   {
-    current: state.landingsReducer.createdLanding,
+    current: state.landingsReducer.currentLanding,
   }
 );
 

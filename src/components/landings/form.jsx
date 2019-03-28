@@ -5,7 +5,7 @@ import Aux from '../../misc/wrapper';
 
 
 const FormLanding = ({
-  btnText, changed, help, name, submitted, title,
+  btnText, changed, help, name, submitted, title, uni,
 }) => {
   const helpName = (help) ? <label htmlFor="nombre">Vas a crear una nueva landing</label> : null;
 
@@ -20,10 +20,10 @@ const FormLanding = ({
         {helpName}
         <input type="text" id="nombre" name="nombre" placeholder="Ej: POLI LAN-400 Pregrado" onChange={changed} value={name} />
         {helpUni}
-        <select name="universidad" id="universidad" onChange={changed}>
+        <select name="universidad" id="universidad" onChange={changed} value={uni}>
           <option defaultValue>Selecciona una</option>
           <option value="Poli">Poli</option>
-          <option value="Areandina">Areandina</option>
+          <option value="Areandina" defaultValue>Areandina</option>
           <option value="IPP">IPP</option>
         </select>
         <button className="btn btn-new" type="submit">{btnText}</button>
@@ -40,6 +40,7 @@ FormLanding.propTypes = {
   name: PropTypes.string,
   submitted: PropTypes.func,
   title: PropTypes.string,
+  uni: PropTypes.string,
 };
 
 

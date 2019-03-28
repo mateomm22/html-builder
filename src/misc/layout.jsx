@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import logo from '../assets/images/logo-ilumno.svg';
+
 const Layout = (props) => {
   const { className, children } = props;
 
-  const header = className !== 'pre-home' ? <header>Logo</header> : null;
+  const header = className !== 'pre-home'
+    ? (
+      <header>
+        Logo
+        <img className="logo-ilumno" src={logo} alt="" />
+      </header>
+    )
+    : null;
+
   const footer = className !== 'pre-home' ? <footer>2019</footer> : null;
 
   return (

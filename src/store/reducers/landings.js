@@ -14,7 +14,7 @@ const landingsReducer = (state = {}, action) => {
       return (
         {
           ...state,
-          createdLanding: action.data,
+          currentLanding: action.data,
         }
       );
 

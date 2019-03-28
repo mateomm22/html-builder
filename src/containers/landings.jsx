@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import db from '../Firebase';
 import * as actions from '../store/actions/actions';
 
+import Aux from '../misc/wrapper';
 import Backdrop from '../misc/backdrop';
 import FormLanding from '../components/landings/form';
 import Layout from '../misc/layout';
 import Modal from '../components/modal';
 
-class Home extends Component {
+class Landings extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,9 +25,6 @@ class Home extends Component {
       modalEdit: false,
       selectedId: '',
     };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.createLanding = this.createLanding.bind(this);
   }
 
   componentDidMount() {
@@ -36,21 +33,16 @@ class Home extends Component {
   }
 
   onEditing(id) {
-    db.collection('landings').doc(id)
-      .get()
-      .then((landing) => {
-        if (landing.exists) {
-          const { nombre, universidad } = landing.data();
-          this.setState(prevState => ({
-            ...prevState,
-            landing: {
-              ...prevState.landing,
-              nombre,
-              universidad,
-            },
-          }));
-        }
-      });
+    const { nombre, universidad } = this.props.landings[id];
+    this.setState(prevState => ({
+      ...prevState,
+      landing: {
+        ...prevState.landing,
+        nombre,
+        universidad,
+      },
+    }));
+    this.openModal('modalEdit', id);
   }
 
   openModal(name, id) {
@@ -68,6 +60,10 @@ class Home extends Component {
   closeModal(name) {
     this.setState({
       backdrop: false,
+      landing: {
+        nombre: '',
+        universidad: '',
+      },
       [name]: false,
       selectedId: '',
     });
@@ -93,18 +89,23 @@ class Home extends Component {
   deleteLanding(id) {
     const { dispatch } = this.props;
     dispatch(actions.deleteLanding(id));
-    this.setState({
-      backdrop: false,
-      modalDelete: false,
-    });
+    this.closeModal('modalDelete');
+  }
+
+  editLanding(event) {
+    event.preventDefault();
+    const { dispatch } = this.props;
+    const { selectedId, landing } = this.state;
+    dispatch(actions.editLanding(selectedId, landing));
+    this.closeModal('modalEdit');
   }
 
   render() {
     const allLandings = (this.props.landings)
-      ? this.props.landings.map((landing) => {
+      ? Object.keys(this.props.landings).map((id) => {
         const {
-          id, nombre, universidad,
-        } = landing;
+          nombre, universidad,
+        } = this.props.landings[id];
         return (
           <tr key={id}>
             <td>
@@ -120,42 +121,85 @@ class Home extends Component {
           </tr>
         );
       })
-      : null;
+      : (
+        <Aux>
+          <tr>
+            <td>
+              <div className="mock" />
+            </td>
+            <td>
+              <div className="mock" />
+            </td>
+            <td>
+              <div className="mock" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div className="mock" />
+            </td>
+            <td>
+              <div className="mock" />
+            </td>
+            <td>
+              <div className="mock" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div className="mock" />
+            </td>
+            <td>
+              <div className="mock" />
+            </td>
+            <td>
+              <div className="mock" />
+            </td>
+          </tr>
+        </Aux>
+      );
 
     return (
       <Layout className="landings">
-        <h1>Test</h1>
+        <h1>Landings</h1>
         <p>Lorem ipsum dolor sit amet.</p>
         <button className="btn btn-new btn-large" type="button" onClick={() => this.openModal('modalCreate')}>Crear landing</button>
         <table>
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Universidad</th>
-              <th>Acciones</th>
+              <th className="nombre">Nombre</th>
+              <th className="uni">Universidad</th>
+              <th className="actions">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {allLandings}
           </tbody>
         </table>
+        {/* Modal Create Landing */}
         <Modal show={this.state.modalCreate} customClass="modal-create" closed={() => this.closeModal('modalCreate')}>
           <FormLanding
             btnText="Crear"
-            changed={this.handleInputChange}
+            changed={e => this.handleInputChange(e)}
             help
-            submitted={this.createLanding}
+            name={this.state.landing.nombre}
+            submitted={e => this.createLanding(e)}
             title={this.state.landing.nombre}
+            uni={this.state.landing.universidad}
           />
         </Modal>
+        {/* Modal Edit Landing */}
         <Modal show={this.state.modalEdit} customClass="modal-create" closed={() => this.closeModal('modalEdit')}>
           <FormLanding
             btnText="Guardar"
-            changed={this.handleInputChange}
-            submitted={this.createLanding}
-            title="Editar"
+            changed={e => this.handleInputChange(e)}
+            name={this.state.landing.nombre}
+            submitted={e => this.editLanding(e)}
+            title="Editar landing"
+            uni={this.state.landing.universidad}
           />
         </Modal>
+        {/* Modal Delete Landing */}
         <Modal show={this.state.modalDelete} customClass="modal-delete" closed={() => this.closeModal('modalDelete')}>
           <strong className="alert">Esta acción no se puede deshacer</strong>
           <button className="btn btn-delete" type="button" onClick={() => this.deleteLanding(this.state.selectedId)}>Borrar</button>
@@ -173,12 +217,12 @@ const mapStateToProps = state => (
 );
 
 // Set propTypes
-Home.propTypes = {
+Landings.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  landings: PropTypes.arrayOf(PropTypes.object),
+  landings: PropTypes.objectOf(PropTypes.object),
   dispatch: PropTypes.func,
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Landings);

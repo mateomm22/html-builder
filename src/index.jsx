@@ -10,7 +10,7 @@ import defaultReducer from './store/reducers/reducer';
 
 import App from './App';
 
-import './assets/main.styl';
+import './assets/stylus/main.styl';
 
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
