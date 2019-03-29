@@ -4,11 +4,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as actions from '../store/actions/actions';
-
 import Layout from '../misc/layout';
 
-class Crear extends Component {
+class Result extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,15 +56,8 @@ const mapStateToProps = state => (
   }
 );
 
-const mapDispatchToProps = dispatch => (
-  {
-    setSelected: id => dispatch(actions.selectCard(id)),
-    onNew: info => dispatch(actions.newProgram(info)),
-  }
-);
-
 // Set propTypes
-Crear.propTypes = {
+Result.propTypes = {
   current: PropTypes.number,
   cards: PropTypes.arrayOf(PropTypes.object),
   data: PropTypes.arrayOf(PropTypes.object),
@@ -76,4 +67,4 @@ Crear.propTypes = {
   }).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Crear);
+export default connect(mapStateToProps)(Result);

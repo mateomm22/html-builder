@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 import * as actions from '../store/actions/actions';
 
-import Aux from '../misc/wrapper';
 import Backdrop from '../misc/backdrop';
 import FormLanding from '../components/landings/form';
 import Layout from '../misc/layout';
@@ -109,7 +108,7 @@ class Landings extends Component {
         return (
           <tr key={id}>
             <td>
-              <Link to={`/${id}`}>{nombre}</Link>
+              <Link to={`/landings/${id}`}>{nombre}</Link>
             </td>
             <td>{universidad}</td>
             <td>
@@ -122,41 +121,17 @@ class Landings extends Component {
         );
       })
       : (
-        <Aux>
-          <tr>
-            <td>
-              <div className="mock" />
-            </td>
-            <td>
-              <div className="mock" />
-            </td>
-            <td>
-              <div className="mock" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className="mock" />
-            </td>
-            <td>
-              <div className="mock" />
-            </td>
-            <td>
-              <div className="mock" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className="mock" />
-            </td>
-            <td>
-              <div className="mock" />
-            </td>
-            <td>
-              <div className="mock" />
-            </td>
-          </tr>
-        </Aux>
+        <tr>
+          <td>
+            <div className="mock" />
+          </td>
+          <td>
+            <div className="mock" />
+          </td>
+          <td>
+            <div className="mock" />
+          </td>
+        </tr>
       );
 
     return (
@@ -182,7 +157,7 @@ class Landings extends Component {
             btnText="Crear"
             changed={e => this.handleInputChange(e)}
             help
-            name={this.state.landing.nombre}
+            nombre={this.state.landing.nombre}
             submitted={e => this.createLanding(e)}
             title={this.state.landing.nombre}
             uni={this.state.landing.universidad}
@@ -193,7 +168,7 @@ class Landings extends Component {
           <FormLanding
             btnText="Guardar"
             changed={e => this.handleInputChange(e)}
-            name={this.state.landing.nombre}
+            nombre={this.state.landing.nombre}
             submitted={e => this.editLanding(e)}
             title="Editar landing"
             uni={this.state.landing.universidad}

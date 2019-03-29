@@ -1,0 +1,33 @@
+table
+  border-collapse collapse
+  margin-top 50px
+  text-align left
+  width 100%
+  thead
+    tr
+      background-color $Blue
+      color white
+  tbody
+    tr:nth-of-type(odd)
+      background-color: lighten($Blue, 82)
+  th,
+  td
+    border 1px solid $Blue
+    padding 10px 15px
+    vertical-align middle
+  .id
+    width 5%
+  .uni
+    width 20%
+  .actions
+    width 17%
+  .mock
+    background-color rgba(black, 0.1)
+    border-radius 5px
+    height 10px
+    margin 7px 0
+    width 100%
+  a
+    color $LightBlue
+    font-weight 500
+    text-decoration none

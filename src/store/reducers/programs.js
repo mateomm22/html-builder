@@ -15,30 +15,34 @@ const initialState = {
   programs: [],
 };
 
-const setCurrent = (state, action) => (
-  {
-    ...state,
-    currentLayout: action.selected,
-  }
-);
-
-const saveProgramData = (state, action) => (
-  {
-    ...state,
-    programs: [
-      ...state.programs,
-      action.info,
-    ],
-  }
-);
-
 const programsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actions.FETCH_PROGRAMS:
+      return {
+        ...state,
+        loadedPrograms: action.programs,
+      };
+
+    case actions.GET_PROGRAM_INFO:
+      return {
+        ...state,
+        currentProgram: action.data,
+      };
+
     case actions.SELECT_CARD:
-      return setCurrent(state, action);
+      return {
+        ...state,
+        currentLayout: action.selected,
+      };
 
     case actions.SAVE_PROGRAM:
-      return saveProgramData(state, action);
+      return {
+        ...state,
+        programs: [
+          ...state.programs,
+          action.info,
+        ],
+      };
 
     default:
       return state;

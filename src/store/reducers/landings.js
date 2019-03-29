@@ -11,6 +11,7 @@ const landingsReducer = (state = {}, action) => {
       );
 
     case actions.CREATE_LANDING:
+    case actions.GET_LANDING_INFO:
       return (
         {
           ...state,

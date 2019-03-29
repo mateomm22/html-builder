@@ -11,8 +11,7 @@ export const fetchLandings = () => (
       .get()
       .then((allLandings) => {
         allLandings.forEach((landing) => {
-          const { nombre, universidad } = landing.data();
-          landings[landing.id] = { nombre, universidad };
+          landings[landing.id] = landing.data();
         });
         dispatch({
           type: actions.FETCH_LANDINGS,
@@ -22,12 +21,15 @@ export const fetchLandings = () => (
   }
 );
 
-export const deleteLanding = id => (
+export const getLandingInfo = id => (
   (dispatch) => {
     db.collection('landings').doc(id)
-      .delete()
-      .then(() => {
-        dispatch(fetchLandings());
+      .get()
+      .then((landing) => {
+        dispatch({
+          type: actions.GET_LANDING_INFO,
+          data: landing.data(),
+        });
       });
   }
 );
@@ -37,9 +39,6 @@ export const newLanding = data => (
     db.collection('landings')
       .add(data)
       .then((docRef) => {
-        db.collection('grupos').doc(docRef.id)
-          .set({ programas: [] })
-          .then();
         dispatch({
           type: actions.CREATE_LANDING,
           data: {
@@ -48,7 +47,7 @@ export const newLanding = data => (
             universidad: data.universidad,
           },
         });
-        History.push(`/${docRef.id}/create`);
+        History.push(`/landings/${docRef.id}/create`);
       });
   }
 );
@@ -63,17 +62,65 @@ export const editLanding = (id, data) => (
   }
 );
 
+export const deleteLanding = id => (
+  (dispatch) => {
+    db.collection('landings').doc(id)
+      .delete()
+      .then(() => {
+        dispatch(fetchLandings());
+      });
+  }
+);
+
+
 // Programs actions
 export const fetchPrograms = idLanding => (
   (dispatch) => {
-    db.collection('grupos').doc(idLanding)
+    const programs = {};
+    db.collection('programas')
+      .where('landing', '==', idLanding)
       .get()
-      .then((programsArr) => {
-        console.log(programsArr.data());
+      .then((allPrograms) => {
+        allPrograms.forEach((program) => {
+          programs[program.id] = program.data();
+        });
         dispatch({
           type: actions.FETCH_PROGRAMS,
-          data: programsArr.data(),
+          programs,
         });
+      });
+  }
+);
+
+export const getProgramInfo = id => (
+  (dispatch) => {
+    db.collection('programas').doc(id)
+      .get()
+      .then((landing) => {
+        dispatch({
+          type: actions.GET_PROGRAM_INFO,
+          data: landing.data(),
+        });
+      });
+  }
+);
+
+export const editProgram = (id, data, idLanding) => (
+  (dispatch) => {
+    db.collection('programas').doc(id)
+      .set(data, { merge: true })
+      .then(() => {
+        dispatch(fetchPrograms(idLanding));
+      });
+  }
+);
+
+export const deleteProgram = (id, idLanding) => (
+  (dispatch) => {
+    db.collection('programas').doc(id)
+      .delete()
+      .then(() => {
+        dispatch(fetchPrograms(idLanding));
       });
   }
 );

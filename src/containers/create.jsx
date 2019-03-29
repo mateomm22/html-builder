@@ -13,12 +13,17 @@ class Crear extends Component {
     this.state = {
       desc: '',
       duracion: '',
-      image: '',
+      imagen: '',
       nombre: '',
       snies: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch, match: { params: { idLanding } } } = this.props;
+    dispatch(actions.getLandingInfo(idLanding));
   }
 
   handleInputChange(event) {
@@ -34,7 +39,7 @@ class Crear extends Component {
     this.setState({
       desc: '',
       duracion: '',
-      image: '',
+      imagen: '',
       nombre: '',
       snies: '',
     });
@@ -66,10 +71,10 @@ class Crear extends Component {
               Snies
               <input type="text" name="snies" id="snies" value={this.state.snies} onChange={this.handleInputChange} />
             </label>
-            <label htmlFor="image">
+            <label htmlFor="imagen">
               Url imagen
               <span>(Debe ser cargada en marketo para obtener la url absoluta)</span>
-              <input type="text" name="image" id="image" value={this.state.image} onChange={this.handleInputChange} />
+              <input type="text" name="imagen" id="imagen" value={this.state.imagen} onChange={this.handleInputChange} />
             </label>
             <label htmlFor="desc">
               Descripción
@@ -98,6 +103,9 @@ Crear.propTypes = {
   dispatch: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.objectOf(PropTypes.string),
   }).isRequired,
 };
 
