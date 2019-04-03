@@ -8,11 +8,13 @@ const initialState = {
     },
     {
       id: 2,
+      name: 'Horizontal card',
+    },
+    {
+      id: 3,
       name: 'Hover card',
     },
   ],
-  currentLayout: 1,
-  programs: [],
 };
 
 const programsReducer = (state = initialState, action) => {
@@ -21,27 +23,6 @@ const programsReducer = (state = initialState, action) => {
       return {
         ...state,
         loadedPrograms: action.programs,
-      };
-
-    case actions.GET_PROGRAM_INFO:
-      return {
-        ...state,
-        currentProgram: action.data,
-      };
-
-    case actions.SELECT_CARD:
-      return {
-        ...state,
-        currentLayout: action.selected,
-      };
-
-    case actions.SAVE_PROGRAM:
-      return {
-        ...state,
-        programs: [
-          ...state.programs,
-          action.info,
-        ],
       };
 
     default:

@@ -1,47 +1,37 @@
 import React, { Component } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
 
 class SortableComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        'item 1',
-        'item 2',
-        'item 3',
-        'item 4',
-        'item 5',
-        'item 6',
-        'item 7',
-        'item 8',
-        'item 9',
-      ],
-      // items: {
-      //   'item 1': true,
-      //   'item 2': true,
-      //   'item 3': true,
-      //   'item 4': true,
-      //   'item 5': true,
-      //   'item 6': true,
-      //   'item 7': true,
-      //   'item 8': true,
-      //   'item 9': true,
-      // },
+      items: {
+        'item 1': true,
+        'item 2': true,
+        'item 3': true,
+        'item 4': true,
+        'item 5': true,
+        'item 6': true,
+        'item 7': true,
+        'item 8': true,
+        'item 9': true,
+      },
     };
+
+    this.updateIndexes = this.updateIndexes.bind(this);
   }
 
-  onSortEnd({ oldIndex, newIndex, collection }) {
-    console.log({ oldIndex, newIndex, collection });
-    // console.log(arrayMove(this.state.items, oldIndex, newIndex));
-    // const reOrdered = arrayMove(this.state.items, oldIndex, newIndex);
-
-    // this.setState({
-    //   items: reOrdered,
-    // });
-    // this.setState(({ items }) => ({
-    //   items: arrayMove(items, oldIndex, newIndex),
-    // }));
+  updateIndexes({ oldIndex, newIndex }) {
+    const arr = [
+      ...Object.keys(this.state.items),
+    ];
+    const updatedObj = {};
+    arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+    arr.map((key) => {
+      updatedObj[key] = true;
+      return updatedObj;
+    });
+    this.setState({ items: updatedObj });
   }
 
   render() {
@@ -50,7 +40,7 @@ class SortableComponent extends Component {
     const SortableList = SortableContainer(({ items }) => (
       <table>
         <tbody>
-          {items.map((value, index) => (
+          {Object.keys(items).map((value, index) => (
             <SortableItem key={`item-${index}`} index={index} value={value} />
           ))}
         </tbody>
@@ -59,7 +49,7 @@ class SortableComponent extends Component {
 
     return (
       <div className="container">
-        <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />;
+        <SortableList items={this.state.items} onSortEnd={this.updateIndexes} />
       </div>
     );
   }

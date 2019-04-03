@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import logo from '../assets/images/logo-ilumno.svg';
 
-const Layout = (props) => {
-  const { className, children } = props;
-
+const Layout = ({ className, children }) => {
   const header = className !== 'pre-home'
     ? (
       <header>

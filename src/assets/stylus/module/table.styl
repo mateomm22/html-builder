@@ -5,8 +5,7 @@ table
   width 100%
   thead
     tr
-      background-color $Blue
-      color white
+      background-color #ccc
   tbody
     tr:nth-of-type(odd)
       background-color: lighten($Blue, 82)
@@ -19,8 +18,10 @@ table
     width 5%
   .uni
     width 20%
+  .programas
+    width 10%
   .actions
-    width 17%
+    width 10%
   .mock
     background-color rgba(black, 0.1)
     border-radius 5px
@@ -31,3 +32,38 @@ table
     color $LightBlue
     font-weight 500
     text-decoration none
+  .pop-container
+    position relative
+  .open-pop
+    cursor pointer
+    &:focus
+      outline none
+  .action-pop
+    background-color white
+    box-shadow 1px 0 3px $Black
+    opacity 0
+    position absolute
+    top 5px
+    left 5px
+    visibility hidden
+    width 100%
+    z-index 10
+    transition()
+    button
+      background none
+      border 0
+      color $LightBlue
+      cursor pointer
+      display block
+      font-size 1.1em
+      padding 10px
+      width 100%
+      transition()
+      i
+        display inline-block
+        margin-right 3px
+      &:hover
+        background-color: #f4f4f4
+    &.active
+      opacity 1
+      visibility visible

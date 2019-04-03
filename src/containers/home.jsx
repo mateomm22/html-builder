@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Home ccntainer
+ */
 const Home = () => (
   <div className="pre-home">
     <div className="container">

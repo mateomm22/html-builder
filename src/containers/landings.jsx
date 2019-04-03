@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -10,27 +11,46 @@ import FormLanding from '../components/landings/form';
 import Layout from '../misc/layout';
 import Modal from '../components/modal';
 
+/**
+ * All Landings View
+ */
 class Landings extends Component {
+  /**
+   * Set the empty local state for the created landing info.
+   */
   constructor(props) {
     super(props);
     this.state = {
       backdrop: false,
       landing: {
         nombre: '',
+        template: 1,
         universidad: '',
       },
+      // These states are used to open the modals.
       modalCreate: false,
       modalDelete: false,
       modalEdit: false,
+      // This is used to open the popover with the actions
+      popover: false,
+      // This is used to get a reference to the landing that will be deleted.
       selectedId: '',
     };
   }
 
+  /**
+   * Fetch all the landings
+   */
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(actions.fetchLandings());
   }
 
+  /**
+   * Get the current info of the selected landing and opens
+   * the editing modal with the filled values
+   * @param {string} id - The id of the current edited landing.
+   */
   onEditing(id) {
     const { nombre, universidad } = this.props.landings[id];
     this.setState(prevState => ({
@@ -44,10 +64,25 @@ class Landings extends Component {
     this.openModal('modalEdit', id);
   }
 
+  togglePopover(id, open) {
+    this.setState({
+      backdrop: true,
+      popover: open,
+      selectedId: id,
+    });
+  }
+
+  /**
+   * Open a Modal
+   * @param {string} name - The name of the modal that will be opened.
+   * @param {string} [id] - the Id of the selected landing in case of
+   * editing and deleting.
+   */
   openModal(name, id) {
     this.setState({
       backdrop: true,
       [name]: true,
+      popover: false,
     });
     if (id) {
       this.setState({
@@ -56,7 +91,18 @@ class Landings extends Component {
     }
   }
 
+  /**
+   * Close a Modal
+   * @param {string} name - The name of the modla that will be closed.
+   */
   closeModal(name) {
+    if (name === 'all') {
+      this.setState({
+        modalCreate: false,
+        modalDelete: false,
+        modalEdit: false,
+      });
+    }
     this.setState({
       backdrop: false,
       landing: {
@@ -64,10 +110,18 @@ class Landings extends Component {
         universidad: '',
       },
       [name]: false,
+      popover: false,
       selectedId: '',
     });
   }
 
+  /**
+   * Get the value of inputs and store them inside the local state
+   * @param {*} event
+   * @param {Object} event.target - The current input.
+   * @param {string} event.target.name - The input's name.
+   * @param {string} event.target.value - The input's value.
+   */
   handleInputChange(event) {
     const { target: { name, value } } = event;
     this.setState(prevState => ({
@@ -79,42 +133,65 @@ class Landings extends Component {
     }));
   }
 
+  /**
+   * Dispatch the action that creates a new landing
+   * @param {*} event - Submit the form.
+   */
   createLanding(event) {
     event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(actions.newLanding(this.state.landing));
+    dispatch(actions.createLanding(this.state.landing));
   }
 
-  deleteLanding(id) {
-    const { dispatch } = this.props;
-    dispatch(actions.deleteLanding(id));
-    this.closeModal('modalDelete');
-  }
-
+  /**
+   * Dispatch the action that edits the selected landing
+   */
   editLanding(event) {
     event.preventDefault();
     const { dispatch } = this.props;
     const { selectedId, landing } = this.state;
-    dispatch(actions.editLanding(selectedId, landing));
+    dispatch(actions.editElement('landings', selectedId, landing, actions.fetchLandings()));
     this.closeModal('modalEdit');
+  }
+
+  /**
+   * Dispatch the action that deletes the selected landing
+   * @param {string} id - The id of the landing that will be deleted.
+   */
+  deleteLanding(id) {
+    const { dispatch } = this.props;
+    dispatch(actions.deleteElement('landings', id, actions.fetchLandings()));
+    this.closeModal('modalDelete');
   }
 
   render() {
     const allLandings = (this.props.landings)
       ? Object.keys(this.props.landings).map((id) => {
         const {
-          nombre, universidad,
+          nombre, programas, universidad,
         } = this.props.landings[id];
+        const showPop = (this.state.popover && this.state.selectedId === id) ? 'active' : '';
         return (
           <tr key={id}>
             <td>
               <Link to={`/landings/${id}`}>{nombre}</Link>
             </td>
             <td>{universidad}</td>
-            <td>
-              <div className="action">
-                <button type="button" className="btn btn-edit" onClick={() => this.onEditing(id)}>Editar</button>
-                <button type="button" className="btn btn-delete" onClick={() => this.openModal('modalDelete', id)}>Borrar</button>
+            <td>{programas}</td>
+            <td className="pop-container">
+              <i
+                className="fas fa-ellipsis-v open-pop"
+                role="button"
+                tabIndex="0"
+                onClick={() => this.togglePopover(id, true)}
+              />
+              <div
+                className={['action-pop', showPop].join(' ')}
+                role="button"
+                tabIndex="0"
+              >
+                <button type="button" onClick={() => this.onEditing(id)}><i className="far fa-edit" /> Editar</button>
+                <button type="button" onClick={() => this.openModal('modalDelete', id)}><i className="far fa-trash-alt" /> Borrar</button>
               </div>
             </td>
           </tr>
@@ -122,6 +199,9 @@ class Landings extends Component {
       })
       : (
         <tr>
+          <td>
+            <div className="mock" />
+          </td>
           <td>
             <div className="mock" />
           </td>
@@ -144,6 +224,7 @@ class Landings extends Component {
             <tr>
               <th className="nombre">Nombre</th>
               <th className="uni">Universidad</th>
+              <th className="programas">Programas</th>
               <th className="actions">Acciones</th>
             </tr>
           </thead>
@@ -179,7 +260,7 @@ class Landings extends Component {
           <strong className="alert">Esta acción no se puede deshacer</strong>
           <button className="btn btn-delete" type="button" onClick={() => this.deleteLanding(this.state.selectedId)}>Borrar</button>
         </Modal>
-        <Backdrop show={this.state.backdrop} />
+        <Backdrop show={this.state.backdrop} clicked={() => this.closeModal('all')} />
       </Layout>
     );
   }

@@ -1,9 +1,6 @@
 .result
-  .container
-    padding 50px 0
-    .subtitle
-      color $Black
-      display block
+  overflow hidden
+  position relative
   input,
   textarea
     background-color: $LightGray
@@ -20,29 +17,9 @@
     padding 10px
     resize none
     width 100%
-  button
-    background-color $Blue
-    border 0
-    border-radius 5px
-    color white
-    cursor pointer
-    margin-top 15px
-    padding 10px 15px
-    width 120px
-    transition()
-    &:hover
-      background-color lightness($Blue, 35%)
+  .btn
+    margin-top 20px
   .msg
-    background-color $LightBlue
-    color white
-    font-size .7em
-    left 0
-    padding 10px 2.5%
-    position absolute
-    top 0
-    width 100%
-    z-index 0
-    transition()
-    transition-duration .35s
+    top -60px
     &.active
-      top 60px
+      top 0
