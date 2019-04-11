@@ -1,32 +1,92 @@
 .landings
-  text-align center
-  .container
-    padding 50px 0
-.modal-create
-  .modal-header
+  .header
     background-color $Blue
-    height 50px
-    left 0
-    padding 15px 10px
-    position absolute
-    text-align center
-    top 0
-    width 100%
-    strong
-      color $Lemon
-      display block
-  form
-    display inline-block
-    margin-top 70px
-    max-width 450px
-    text-align center
-    input,
-    select
-      display block
-      margin-bottom 10px
+    color white
+    padding-top 50px
+    .logo-app
+      max-width 300px
+    p
+      font-style italic
+      max-width 500px
+    .bar
+      background-color #183F66
+      padding 7px 0
+      .btn
+        display block
+        margin-bottom 10px
+      .input
+        max-width 550px
+        position relative
+        width 100%
+      input
+        border 0
+        border-radius 6px
+        color $Blue
+        display inline-block
+        height 40px
+        padding 5px 10px
+        width 100%
+        set-font('open', 400)
+      .search-icon
+        color $Blue
+        font-size 1.2em
+        position absolute
+        right 10px
+        top 10px
+  .main-container
+    overflow auto
+  .modal-create,
+  .modal-edit
+    .modal-header
+      background-color $Blue
+      height 50px
+      left 0
+      padding 15px 10px
+      position absolute
+      text-align center
+      top 0
       width 100%
-.modal-delete
-  .alert
-    display block
-    color red
-    margin-bottom 25px
+      strong
+        color $Lemon
+        display block
+    form
+      display inline-block
+      margin 70px auto 30px
+      max-width 550px
+      text-align center
+      width 100%
+      label
+        display block
+        text-align center
+        margin-bottom 10px
+      input,
+      select
+        border 1px solid $Blue
+        border-radius 6px
+        display block
+        height 40px
+        margin-bottom 30px
+        padding 10px 15px
+        width 100%
+      button
+        margin 0 auto
+  .modal-edit
+    form
+      label
+        text-align left
+  .modal-delete
+    .alert
+      display block
+      color red
+      margin-bottom 25px
+  +media-query('medium')
+    .header
+      .bar
+        .container
+          align-items center
+          display flex
+          justify-content space-between
+        .btn
+          margin-bottom 0
+    .main-container
+      overflow visible

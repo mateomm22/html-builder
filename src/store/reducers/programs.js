@@ -4,15 +4,12 @@ const initialState = {
   cards: [
     {
       id: 1,
-      name: 'Simple card',
     },
     {
       id: 2,
-      name: 'Horizontal card',
     },
     {
       id: 3,
-      name: 'Hover card',
     },
   ],
 };
@@ -24,6 +21,20 @@ const programsReducer = (state = initialState, action) => {
         ...state,
         loadedPrograms: action.programs,
       };
+
+    case actions.FILTER_PROGRAMS:
+      return (
+        {
+          ...state,
+          loadedPrograms: {
+            ...state.loadedPrograms,
+            [action.data.id]: {
+              ...state.loadedPrograms[action.data.id],
+              visible: action.data.show,
+            },
+          },
+        }
+      );
 
     default:
       return state;

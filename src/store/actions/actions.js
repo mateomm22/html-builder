@@ -9,7 +9,7 @@ import db from '../../Firebase';
  * @returns {object} An object with all the created programs
  * inside the landing.
  */
-const getProgramsCount = idLanding => (
+export const getProgramsCount = idLanding => (
   (dispatch) => {
     db.collection('programas')
       .where('landing', '==', idLanding)
@@ -46,7 +46,9 @@ export const fetchLandings = () => (
         });
         dispatch({
           type: actions.FETCH_LANDINGS,
-          data: landings,
+          data: {
+            ...landings,
+          },
         });
       });
   }
@@ -148,7 +150,7 @@ export const createProgram = (data, finish, idLanding, template) => (
           db.collection('programas')
             .add({
               ...data,
-              order: total + 1,
+              order: total,
             })
             .then(() => {
               if (finish) {

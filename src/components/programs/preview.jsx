@@ -21,7 +21,7 @@ const Preview = ({
             <p>{desc || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis ultricies nunc eget fermentum. Pellentesque condimentum velit vel leo tincidunt consequat. Maecenas at odio nulla.'}</p>
             <span>{duracion || '4 años'}</span>
             <small>{adicional || 'Información adicional'}</small>
-            <button type="button" className="btn btn-large">{boton || 'Más información'}</button>
+            <button type="button" className="btn btn-dark">{boton || 'Más información'}</button>
           </div>
         </div>
       );
@@ -37,7 +37,7 @@ const Preview = ({
             <p>{desc || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis ultricies nunc eget fermentum. Pellentesque condimentum velit vel leo tincidunt consequat. Maecenas at odio nulla.'}</p>
             <span>{duracion || '4 años'}</span>
             <small>{adicional || 'Información adicional'}</small>
-            <button type="button" className="btn btn-large">{boton || 'Más información'}</button>
+            <button type="button" className="btn btn-dark">{boton || 'Más información'}</button>
           </div>
         </div>
       );
@@ -55,7 +55,7 @@ const Preview = ({
             <p>{desc || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis ultricies nunc eget fermentum. Pellentesque condimentum velit vel leo tincidunt consequat. Maecenas at odio nulla.'}</p>
             <span>{duracion || '4 años'}</span>
             <small>{adicional || 'Información adicional'}</small>
-            <button type="button" className="btn btn-large">{boton || 'Más información'}</button>
+            <button type="button" className="btn btn-dark">{boton || 'Más información'}</button>
           </div>
         </div>
       );

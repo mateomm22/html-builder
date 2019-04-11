@@ -1,9 +1,9 @@
 //Fonts mixins
 set-font($family, $weight)
-  if $family == 'rale'
-    font-family 'Raleway', serif
-  if $family == 'mont'
-    font-family 'Montserrat', sans-serif
+  if $family == 'zilla'
+    font-family 'Zilla Slab', serif
+  if $family == 'open'
+    font-family 'Open Sans', sans-serif
   font-weight $weight
   
 //Media queries mixin  
@@ -22,6 +22,7 @@ media-query($size)
     @media (min-width unit($size, px))
       {block}
 
+// Transitions
 transition(duration=.2s)
   transition-duration duration
   transition-property all

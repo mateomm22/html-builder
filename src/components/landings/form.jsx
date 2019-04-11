@@ -7,9 +7,9 @@ import Aux from '../../misc/wrapper';
 const FormLanding = ({
   btnText, changed, help, nombre, submitted, title, uni,
 }) => {
-  const helpName = (help) ? <label htmlFor="nombre">Vas a crear una nueva landing</label> : null;
+  const helpName = (help) ? <label htmlFor="nombre">Se va a crear una nueva landing</label> : <label htmlFor="nombre">Nombre</label>;
 
-  const helpUni = (help) ? <label htmlFor="universidad">y selecciona la universidad</label> : null;
+  const helpUni = (help) ? <label htmlFor="universidad">seleccione la universidad a la que pertenece</label> : <label htmlFor="universidad">Universidad</label>;
 
   return (
     <Aux>
@@ -18,10 +18,10 @@ const FormLanding = ({
       </div>
       <form action="" onSubmit={submitted}>
         {helpName}
-        <input type="text" id="nombre" name="nombre" placeholder="Ej: POLI LAN-400 Pregrado" onChange={changed} value={nombre} />
+        <input type="text" id="nombre" name="nombre" placeholder="Ej: POLI LAN-400 Pregrado" onChange={changed} value={nombre} required />
         {helpUni}
-        <select name="universidad" id="universidad" onChange={changed} value={uni}>
-          <option defaultValue>Selecciona una</option>
+        <select name="universidad" id="universidad" onChange={changed} value={uni} required>
+          <option defaultValue>Seleccione una</option>
           <option value="Poli">Poli</option>
           <option value="Areandina" defaultValue>Areandina</option>
           <option value="IPP">IPP</option>

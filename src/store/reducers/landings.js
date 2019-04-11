@@ -20,7 +20,7 @@ const landingsReducer = (state = {}, action) => {
               ...state.landings[action.data.id],
               programas: action.data.total,
             },
-          },
+          }
         }
       );
 
@@ -29,6 +29,20 @@ const landingsReducer = (state = {}, action) => {
         {
           ...state,
           currentLanding: action.data,
+        }
+      );
+
+    case actions.FILTER_LANDINGS:
+      return (
+        {
+          ...state,
+          landings: {
+            ...state.landings,
+            [action.data.id]: {
+              ...state.landings[action.data.id],
+              visible: action.data.show,
+            },
+          },
         }
       );
 

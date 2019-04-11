@@ -7,8 +7,11 @@ const Result = ({
   action, data, msgClass, reference, template,
 }) => {
   let allData;
+  let total;
   if (data) {
+    total = Object.keys(data).length;
     allData = Object.keys(data).map((idProgram) => {
+      // console.log(template);
       const {
         desc, duracion, image, nombre, adicional,
       } = data[idProgram];
@@ -26,7 +29,7 @@ const Result = ({
 
   return (
     <div className="result">
-      <span className="subtitle">Resultado</span>
+      <span className="subtitle">Se ha generado el código fuente para <strong>{total} programas</strong></span>
       <input ref={reference} readOnly value={allData || 'Ocurrió un error, intenta generar el código de nuevo'} />
       <button
         type="button"
@@ -35,7 +38,7 @@ const Result = ({
       >
         Copiar HTML
       </button>
-      <span className={['msg', msgClass].join(' ')}>Código copiado al portapapeles</span>
+      <span className={['copied', msgClass].join(' ')}>Código copiado al portapapeles</span>
     </div>
   );
 };
