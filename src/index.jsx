@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import History from './history';
 
 import defaultReducer from './store/reducers/reducer';
 
@@ -19,9 +20,9 @@ const store = createStore(defaultReducer, composeEnhancers(
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={History}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
 

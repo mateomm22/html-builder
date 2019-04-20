@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const Layout = (props) => {
   const { className, children } = props;
 
-  const header = className !== 'home' ? <header>Logo</header> : null;
-  const footer = className !== 'home' ? <footer>2019</footer> : null;
+  const header = className !== 'pre-home' ? <header>Logo</header> : null;
+  const footer = className !== 'pre-home' ? <footer>2019</footer> : null;
 
   return (
     <div className={className}>
