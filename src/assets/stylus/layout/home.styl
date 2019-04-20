@@ -1,0 +1,37 @@
+.pre-home
+  background-color $Blue
+  min-height 100vh
+  .container
+    display flex
+    flex-direction column
+    justify-content center
+    margin 0 auto
+    min-height 100vh
+  .title
+    text-align left
+    color white
+    margin-bottom 5%
+    .logo
+      display inline-block
+      max-width 450px
+      width 100%
+    small
+      display block
+      font-size 1em
+      margin-top 5px
+      set-font('open', 400)
+  .text
+    color white
+    p
+      font-style italic
+  +media-query('medium')
+    .container
+      align-items center
+      flex-direction row
+      .title
+        flex 0 0 42%
+        margin 0
+      .text
+        border-left 2px solid white
+        flex 0 0 50%
+        padding-left 30px

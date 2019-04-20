@@ -1,16 +1,10 @@
 //Fonts mixins
 set-font($family, $weight)
-  if $family == 'rale'
-    font-family 'Raleway', serif
-  if $family == 'mont'
-    font-family 'Montserrat', sans-serif
+  if $family == 'zilla'
+    font-family 'Zilla Slab', serif
+  if $family == 'open'
+    font-family 'Open Sans', sans-serif
   font-weight $weight
-
-//Grid mixin
-make-grid($cols, x=25px, y=25px)
-  grid-template-columns repeat($cols, 1fr)
-  grid-template-rows auto
-  grid-gap x y
   
 //Media queries mixin  
 media-query($size)
@@ -28,7 +22,8 @@ media-query($size)
     @media (min-width unit($size, px))
       {block}
 
-transition()
-  transition-duration .2s
+// Transitions
+transition(duration=.2s)
+  transition-duration duration
   transition-property all
   -moz-transition-timing-function ease-in

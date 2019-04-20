@@ -1,0 +1,31 @@
+*
+  box-sizing border-box
+
+html, body
+  background-color #f4f4f4
+  margin 0
+  padding 0
+  set-font('open', 400) 
+  &::-webkit-scrollbar
+    width 6px
+  &::-webkit-scrollbar-track
+    box-shadow inset 0 0 6px rgba(0,0,0,0.3)
+    -webkit-box-shadow inset 0 0 6px rgba(0,0,0,0.3)
+  &::-webkit-scrollbar-thumb
+    background-color $Blue
+    outline 1px solid slategrey
+    border-radius 3px
+
+img
+  max-width 100%
+
+h1, h2, h3, h4, h5, h6
+  margin 0
+  set-font('zilla', 400)
+
+.container 
+  margin 0 auto
+  max-width 1180px
+  width 95%
+.main-container
+  margin 60px auto

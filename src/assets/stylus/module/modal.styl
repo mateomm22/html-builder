@@ -1,0 +1,64 @@
+.backdrop,
+.modal
+  opacity 0
+  visibility hidden
+  transition()
+  &.active
+    opacity 1
+    visibility visible
+
+.backdrop
+  background-color rgba(black, 0.75)
+  height 100vh
+  left 0
+  position fixed
+  top 0
+  width 100%
+  z-index 5
+  &.clear
+    transition-property none
+    background-color transparent
+.modal
+  display block
+  height 100%
+  left 0
+  pointer-events none
+  position fixed
+  top 0
+  width 100%
+  z-index 10
+
+.modal-body  
+  margin 15vh auto
+  max-height: 80vh
+  max-width 650px
+  overflow auto
+  pointer-events all
+  position relative
+  width 90%
+  &::-webkit-scrollbar
+    width 4px
+  &::-webkit-scrollbar-track
+    box-shadow inset 0 0 6px rgba(0,0,0,0.3)
+  &::-webkit-scrollbar-thumb
+    background-color #999
+    outline 1px solid slategrey
+    border-radius 1px
+  .close
+    background-color transparent
+    border 0
+    color $LightBlue
+    cursor pointer
+    font-size 1.3em
+    position absolute
+    top 12px
+    right 10px
+    z-index 1
+    &:focus
+      outline none
+
+.modal-content
+  background-color white
+  padding 15px
+  text-align center
+  width 100%

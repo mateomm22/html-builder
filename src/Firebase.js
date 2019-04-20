@@ -1,12 +1,15 @@
-import * as firebase from 'firebase';
+/* eslint-disable no-undef */
+// import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 const config = {
-  apiKey: 'AIzaSyCnndgZFL7Tw73V4-0xlEP5qEvM3X0GJQU',
-  authDomain: 'program-builder.firebaseapp.com',
-  databaseURL: 'https://program-builder.firebaseio.com',
-  projectId: 'program-builder',
-  storageBucket: 'program-builder.appspot.com',
-  messagingSenderId: '850037628604',
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  databaseURL: BASE_URL,
+  projectId: PROJECT_ID,
+  storageBucket: BUCKET,
+  messagingSenderId: SENDER_ID,
 };
 firebase.initializeApp(config);
 const db = firebase.firestore();

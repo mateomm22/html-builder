@@ -1,0 +1,84 @@
+.programs
+  .header
+    background-color $Blue
+    color white
+    padding-top 15px
+    .go-back
+      color $Lemon
+      display block
+      text-decoration none
+      margin-bottom 50px
+    p
+      font-style italic
+      max-width 500px
+    .info
+      color white
+      display block
+      font-size 1.2em
+      font-weight 600
+      margin -10px 0 15px
+      span
+        font-size .9em
+        font-weight 400
+    .bar
+      background-color #183F66
+      padding 5px 0
+      .container
+        align-items center
+        display flex
+        justify-content space-between
+      a
+        text-decoration none
+        color inherit
+  .note
+    color $Blue
+    font-size .9em
+    font-style italic
+    margin 10px 0
+  .modal-edit
+    .modal-header
+      background-color $Blue
+      height 50px
+      left 0
+      padding 15px 10px
+      position absolute
+      text-align center
+      top 0
+      width 100%
+      strong
+        color $Lemon
+        display block
+    form.edit
+      margin 50px auto 20px
+      max-width 500px
+      .input
+        display flex
+        flex-direction column-reverse
+      label
+        margin-bottom 5px
+        text-align left
+      input,
+      textarea
+        border 1px solid $Blue
+        border-radius 5px
+        display block
+        height 35px
+        margin-bottom 15px
+        padding 0 5px
+        width 100%
+        set-font('open', 400)
+      textarea
+        height 100px
+        padding 5px
+        resize none
+
+  // Generate HTML button
+  .generate
+    display block
+    margin-top 30px
+
+  .modal-delete
+    .alert
+      display block
+      color red
+      margin-bottom 25px

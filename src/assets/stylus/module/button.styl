@@ -1,0 +1,30 @@
+.btn
+  background-color $Lemon
+  border 0
+  border-radius 5px
+  color $Blue
+  cursor pointer
+  display inline-block
+  font-size 1.2em
+  min-width 0
+  padding 10px 15px
+  text-align center
+  text-decoration none
+  text-transform uppercase
+  set-font('open', 700)
+  transition()
+  
+// Colors 
+.btn-delete
+  background-color #b70404
+  color white
+  &:hover
+    background-color lighten(#b70404, 15)
+
+.btn-dark
+  background-color: #666
+  color white
+
++media-query('medium')
+  .btn
+    min-width 220px

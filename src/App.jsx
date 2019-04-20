@@ -1,20 +1,21 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
+import History from './history';
 
 import Create from './containers/create';
 import Home from './containers/home';
 import Landings from './containers/landings';
-import Programas from './containers/programas';
-import Result from './containers/result';
+import Programs from './containers/programs';
 
 const App = () => (
-  <Switch>
-    <Route path="/" exact component={Home} />
-    <Route path="/landings" exact component={Landings} />
-    <Route path="/:idLanding" exact component={Programas} />
-    <Route path="/:idLanding/create" component={Create} />
-    <Route path="/result" component={Result} />
-  </Switch>
+  <Router history={History}>
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/landings" exact component={Landings} />
+      <Route path="/landings/:idLanding" exact component={Programs} />
+      <Route path="/landings/:idLanding/create" component={Create} />
+    </Switch>
+  </Router>
 );
 
 export default App;

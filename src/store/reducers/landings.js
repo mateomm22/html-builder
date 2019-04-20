@@ -10,11 +10,50 @@ const landingsReducer = (state = {}, action) => {
         }
       );
 
-    case actions.CREATE_LANDING:
+    case actions.GET_PROGRAMS_COUNT:
       return (
         {
           ...state,
-          createdLanding: action.data,
+          landings: {
+            ...state.landings,
+            [action.data.id]: {
+              ...state.landings[action.data.id],
+              programas: action.data.total,
+            },
+          }
+        }
+      );
+
+    case actions.GET_LANDING_INFO:
+      return (
+        {
+          ...state,
+          currentLanding: action.data,
+        }
+      );
+
+    case actions.FILTER_LANDINGS:
+      return (
+        {
+          ...state,
+          landings: {
+            ...state.landings,
+            [action.data.id]: {
+              ...state.landings[action.data.id],
+              visible: action.data.show,
+            },
+          },
+        }
+      );
+
+    case actions.SET_TEMPLATE:
+      return (
+        {
+          ...state,
+          currentLanding: {
+            ...state.currentLanding,
+            template: action.id,
+          },
         }
       );
 

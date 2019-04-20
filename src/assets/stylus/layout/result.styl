@@ -1,0 +1,31 @@
+.result
+  overflow hidden
+  position relative
+  input,
+  textarea
+    background-color: $LightGray
+    border 1px solid $Gray
+    border-radius 3px
+    color $Black
+    display block
+    font-family 'Courier New', Courier, monospace
+    font-size .9em
+    line-height 1.3
+    margin-top 20px
+    max-width 700px
+    height 45px
+    padding 10px
+    resize none
+    width 100%
+  .btn
+    margin-top 20px
+  .copied
+    color $LightBlue
+    display block
+    font-size .8em
+    opacity 0
+    visibility hidden
+    transition()
+    &.active
+      opacity 1
+      visibility visible
